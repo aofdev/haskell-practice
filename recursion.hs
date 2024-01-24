@@ -28,3 +28,28 @@ sumListWithCondition' [] = 0
 sumListWithCondition' (x : xs)
   | even x = x + sumListWithCondition' xs
   | otherwise = sumListWithCondition' xs
+
+
+-- reverse list
+reverseList :: [o] -> [o]
+reverseList [] = []
+reverseList (x : xs) = reverseList xs ++ [x]
+
+-- reverseList [1, 2, 3]
+-- reverseList [2, 3] ++ [1]
+-- (reverseList [3] ++ [2]) ++ [1]
+-- ((reverseList [] ++ [3]) ++ [2]) ++ [1]
+-- ((([] ++ [3]) ++ [2]) ++ [1])
+-- [3, 2, 1]
+
+-- find number in list
+findNumber :: Integer -> [Integer] -> Bool
+findNumber n [] = False
+findNumber n (x : xs) 
+  | n == x  = True
+  | otherwise = findNumber n xs
+
+-- findNumber 3 [1, 2, 3]
+-- findNumber 3 [2, 3]
+-- findNumber 3 [3]
+-- True
