@@ -1,5 +1,7 @@
 module DataTypes where
 
+import Prelude hiding (fst, snd)
+
 -- Data types
 -- data Bool = False | True
 -- Left side of | is a type constructor
@@ -67,3 +69,35 @@ initChain2 = Block (Block (Block GenesisBlock 3) 4) 5
 chainLength :: Blockchain a -> Int
 chainLength GenesisBlock = 0
 chainLength (Block chain value) = 1 + chainLength chain
+
+-- Built-in Datatypes
+
+-- tuples
+fst :: (a, b) -> a
+fst (a, _) = a
+
+snd :: (a, b) -> b
+snd (_, b) = b
+
+-- Maybe
+
+safeDiv :: Int -> Int -> Maybe Int
+safeDiv _ 0 = Nothing
+safeDiv a b = Just (a `div` b)
+
+safeHead :: [a] -> Maybe a
+safeHead [] = Nothing
+safeHead xs = Just (head xs)
+
+
+-- Either
+-- :i Either
+-- data Either a b = Left a | Right b
+
+safeDivEither :: Int -> Int -> Either String Int
+safeDivEither _ 0 = Left "Cannot divide by zero"
+safeDivEither a b = Right (a `div` b)
+
+safeHeadEither :: [a] -> Either String a
+safeHeadEither [] = Left "Empty list"
+safeHeadEither xs = Right (head xs)
