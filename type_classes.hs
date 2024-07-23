@@ -48,3 +48,35 @@ scoreA = Score (1.0, 2.0)
 
 scoreB :: Score
 scoreB = Score (3.0, 4.0)
+
+data Boolean = Yes | No
+
+toString :: Boolean -> String
+toString Yes = "Yes"
+toString No = "No"
+
+instance Show Boolean where
+  show :: Boolean -> String
+  show = toString
+
+instance Eq Boolean where
+  (==) :: Boolean -> Boolean -> Bool
+  (==) Yes Yes = True
+  (==) No No = True
+  (==) _ _ = False
+
+data Weekday = Monday | Tuesday | Wednesday | Thursday | Friday | Saturday | Sunday deriving (Show, Eq, Ord)
+
+-- record syntax
+data ScoreS = ScoreS { midtermScore :: Int
+                    , finalScore :: Int
+                    , homeworkScore :: Int
+                    , projectScore :: Int
+                  } deriving (Show)
+
+totalScoreS :: ScoreS -> Int
+totalScoreS (ScoreS midterm final homework project) = midterm + final + homework + project
+
+instance Eq ScoreS where
+  (==) :: ScoreS -> ScoreS -> Bool
+  s1 == s2 = totalScoreS s1 == totalScoreS s2
